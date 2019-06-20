@@ -13,14 +13,18 @@ class List extends React.Component {
 
   componentDidMount() {
     const { url } = this.props;
-    this.search(url);
+    this.getList(url);
   }
 
-  search = url => {
+  getList = url => {
     axios.get(url).then(res => {
+      let results = res.data;
+      if (!Array.isArray(res.data)) {
+        results = res.data.items;
+      }
       this.setState({
         links: parse(res.headers.link),
-        results: [...this.state.results, ...res.data.items]
+        results: [...this.state.results, ...results]
       });
     });
   };

@@ -4,7 +4,7 @@ import Input from "./Input";
 import List from "./List";
 import debounce from "lodash.debounce";
 
-class Search extends React.Component {
+class SearchPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,7 +41,6 @@ class Search extends React.Component {
         <Input handleChange={this.handleInputChange} />
         {this.state.search ? (
           <List
-            value={value}
             createItem={this.createItem}
             url={`https://api.github.com/search/users?q=${value}+type:org`}
           />
@@ -51,4 +50,4 @@ class Search extends React.Component {
   }
 }
 
-export default Search;
+export default SearchPage;
