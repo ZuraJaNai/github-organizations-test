@@ -14,7 +14,35 @@ class List extends React.Component {
   componentDidMount() {
     const { url } = this.props;
     this.getList(url);
+    document.addEventListener("scroll", this.trackScrolling);
   }
+
+  componentWillUnmount() {
+    document.removeEventListener("scroll", this.trackScrolling);
+  }
+
+  trackScrolling = () => {
+    const windowHeight =
+      "innerHeight" in window
+        ? window.innerHeight
+        : document.documentElement.offsetHeight;
+    const body = document.body;
+    const html = document.documentElement;
+    const docHeight = Math.max(
+      body.scrollHeight,
+      body.offsetHeight,
+      html.clientHeight,
+      html.scrollHeight,
+      html.offsetHeight
+    );
+    const windowBottom = windowHeight + window.pageYOffset;
+    if (windowBottom >= docHeight) {
+      const { links } = this.state;
+      if (links && links.next) {
+        this.getList(links.next.url);
+      }
+    }
+  };
 
   getList = url => {
     axios.get(url).then(res => {
