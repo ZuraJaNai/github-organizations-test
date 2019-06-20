@@ -18,12 +18,12 @@ function App() {
         <Route
           exact
           path="/user/:name/following"
-          component={() => <UserFollow type="following" />}
+          component={props => <UserFollow {...props} type="following" />}
         />
         <Route
           exact
           path="/user/:name/followers"
-          component={() => <UserFollow type="followers" />}
+          component={props => <UserFollow {...props} type="followers" />}
         />
         <Route component={PageNotFound} />
       </Switch>
