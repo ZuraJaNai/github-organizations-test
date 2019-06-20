@@ -25,32 +25,40 @@ class OrganizationInfo extends React.Component {
     });
   };
 
-  // getMembersList = () => {
-  //   const { name } = this.state;
-  //   axios.get(`https://api.github.com/orgs/${name}/members`).then(res => {
-  //     this.setState({ users: res.data });
-  //   });
-  // };
   createItem = data => {
     const userName = data.login;
     return (
       <div key={userName}>
+        <img alt="avatar" src={data.avatar_url} />
         <Link to={`/user/${userName}`}>
           <h3>{userName}</h3>
+        </Link>
+        <Link to={`/user/${userName}/followers`}>
+          <h5>Followers</h5>
+        </Link>
+        <Link to={`/user/${userName}/followers`}>
+          <h5>Following</h5>
         </Link>
       </div>
     );
   };
 
   render() {
-    const { name } = this.state;
+    const { name, info } = this.state;
     return (
       <div>
-        {/* info */}
-        <List
-          createItem={this.createItem}
-          url={`https://api.github.com/orgs/${name}/members`}
-        />
+        <div>
+          <img alt="avatar" src={info.avatar_url} />
+          <h2>{info.login}</h2>
+          <p>{info.bio}</p>
+        </div>
+        <div>
+          <h3>Organization members</h3>
+          <List
+            createItem={this.createItem}
+            url={`https://api.github.com/orgs/${name}/members`}
+          />
+        </div>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Item = props => {
+const UserInfo = props => {
   return (
     <div>
       <p>User info</p>
@@ -8,4 +8,4 @@ const Item = props => {
   );
 };
 
-export default Item;
+export default UserInfo;
