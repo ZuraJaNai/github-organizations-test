@@ -1,11 +1,9 @@
-import React from "react";
+import React from 'react';
 
-const PageNotFound = () => {
-  return (
-    <div>
-        <h1>You reached the end of the internet</h1>
-    </div>
-  );
-};
+const PageNotFound = () => (
+  <div>
+    <h1>You reached the end of the internet</h1>
+  </div>
+);
 
-export default (PageNotFound);
+export default PageNotFound;

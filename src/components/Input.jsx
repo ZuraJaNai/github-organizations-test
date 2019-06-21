@@ -1,18 +1,29 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const Input = props => {
+const Input = (props) => {
+  const {
+    inputId, inputText, value, handleChange,
+  } = props;
   return (
     <div className="input-form">
       <input
         type="text"
-        id={props.inputId}
-        placeholder={props.inputText}
-        value={props.value}
-        onChange={props.handleChange}
+        id={inputId}
+        placeholder={inputText}
+        value={value}
+        onChange={handleChange}
       />
-      <label htmlFor={props.inputId}>{props.inputText}</label>
+      <label htmlFor={inputId}>{inputText}</label>
     </div>
   );
+};
+
+Input.propTypes = {
+  inputId: PropTypes.string.isRequired,
+  inputText: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 export default Input;

@@ -1,15 +1,22 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Input from "./Input";
-import List from "./List";
-import debounce from "lodash.debounce";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import debounce from 'lodash.debounce';
+import PropTypes from 'prop-types';
+import Input from './Input';
+import List from './List';
 
 class SearchPage extends React.Component {
+  delayedCallback = debounce(() => {
+    const { value } = this.state;
+    localStorage.setItem('value', value);
+    this.setState({ search: true });
+  }, 500);
+
   constructor(props) {
     super(props);
     this.state = {
-      value: props.value || "",
-      search: false
+      value: props.value || '',
+      search: false,
     };
   }
 
@@ -20,19 +27,13 @@ class SearchPage extends React.Component {
     }
   }
 
-  delayedCallback = debounce(() => {
-    const { value } = this.state;
-    localStorage.setItem("value", value);
-    this.setState({ search: true });
-  }, 500);
-
-  handleInputChange = event => {
+  handleInputChange = (event) => {
     event.persist();
     this.setState({ value: event.target.value, search: false });
     this.delayedCallback();
   };
 
-  createItem = data => {
+  createItem = (data) => {
     const name = data.login;
     return (
       <div key={name}>
@@ -44,16 +45,16 @@ class SearchPage extends React.Component {
   };
 
   render() {
-    const { value } = this.state;
+    const { value, search } = this.state;
     return (
       <div>
         <Input
           inputId="orgName"
-          inputText={"Organization name"}
+          inputText="Organization name"
           value={value}
           handleChange={this.handleInputChange}
         />
-        {this.state.search ? (
+        {search ? (
           <List
             createItem={this.createItem}
             url={`https://api.github.com/search/users?q=${value}+type:org`}
@@ -63,5 +64,9 @@ class SearchPage extends React.Component {
     );
   }
 }
+
+SearchPage.propTypes = {
+  value: PropTypes.string.isRequired,
+};
 
 export default SearchPage;

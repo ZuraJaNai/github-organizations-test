@@ -1,18 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import List from "./List.jsx";
-import Info from "./Info.jsx";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import List from './List';
+import Info from './Info';
 
-const UserFollow = props => {
+const UserFollow = (props) => {
+  const {
+    type,
+    match: {
+      params: { name },
+    },
+  } = props;
   let titleText;
-  if (props.type === "following") {
-    titleText = `Users followed by ${props.match.params.name}`;
+  if (type === 'following') {
+    titleText = `Users followed by ${name}`;
   } else {
-    titleText = `Users following ${props.match.params.name}`;
+    titleText = `Users following ${name}`;
   }
   const title = <h3 className="title">{titleText}</h3>;
 
-  const createItem = data => {
+  const createItem = (data) => {
     const userName = data.login;
     const text = (
       <div>
@@ -33,14 +40,18 @@ const UserFollow = props => {
   return (
     <div>
       {title}
-      <List
-        createItem={createItem}
-        url={`https://api.github.com/users/${props.match.params.name}/${
-          props.type
-        }`}
-      />
+      <List createItem={createItem} url={`https://api.github.com/users/${name}/${type}`} />
     </div>
   );
+};
+
+UserFollow.propTypes = {
+  type: PropTypes.string.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      name: PropTypes.string,
+    }),
+  }).isRequired,
 };
 
 export default UserFollow;

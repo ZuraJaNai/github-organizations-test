@@ -32,6 +32,10 @@ nav a {
   font-weight: bold;
 }
 
+a:hover {
+  color: #28a745;
+}
+
 a {
   color: #000000;
 }
