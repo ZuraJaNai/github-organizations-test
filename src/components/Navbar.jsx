@@ -7,6 +7,7 @@ const Navbar = (props) => {
   return (
     <nav>
       <Link to="/" onClick={refresh}>
+        <img id="logo" alt="logo" src={`${process.env.PUBLIC_URL}/logo.png`} />
         <p>GitHub Organizations</p>
       </Link>
     </nav>
