@@ -59,7 +59,11 @@ class List extends React.Component {
 
   render() {
     const { results } = this.state;
-    return <div>{results.map(element => this.props.createItem(element))}</div>;
+    return (
+      <div className="list">
+        {results.map(element => this.props.createItem(element))}
+      </div>
+    );
   }
 }
 

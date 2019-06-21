@@ -47,7 +47,12 @@ class SearchPage extends React.Component {
     const { value } = this.state;
     return (
       <div>
-        <Input value={value} handleChange={this.handleInputChange} />
+        <Input
+          inputId="orgName"
+          inputText={"Organization name"}
+          value={value}
+          handleChange={this.handleInputChange}
+        />
         {this.state.search ? (
           <List
             createItem={this.createItem}

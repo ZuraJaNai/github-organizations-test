@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import List from "./List";
+import Info from "./Info";
 
 class OrganizationInfo extends React.Component {
   constructor(props) {
@@ -9,13 +10,11 @@ class OrganizationInfo extends React.Component {
     this.state = {
       name: props.match.params.name,
       info: {}
-      // users: {}
     };
   }
 
   componentDidMount() {
     this.getOrganizationInfo();
-    //this.getMembersList();
   }
 
   getOrganizationInfo = () => {
@@ -27,38 +26,38 @@ class OrganizationInfo extends React.Component {
 
   createItem = data => {
     const userName = data.login;
-    return (
-      <div key={userName}>
-        <img alt="avatar" src={data.avatar_url} />
+    const text = (
+      <div>
         <Link to={`/user/${userName}`}>
-          <h3>{userName}</h3>
+          <p>{userName}</p>
         </Link>
         <Link to={`/user/${userName}/followers`}>
-          <h5>Followers</h5>
+          <p>Followers</p>
         </Link>
         <Link to={`/user/${userName}/followers`}>
-          <h5>Following</h5>
+          <p>Following</p>
         </Link>
       </div>
     );
+    return <Info key={userName} imgSrc={data.avatar_url} text={text} />;
   };
 
   render() {
     const { name, info } = this.state;
+    const text = (
+      <div>
+        <h2>{info.login}</h2>
+        {info.bio ? <p>{`Bio: ${info.bio}`}</p> : null}
+      </div>
+    );
     return (
       <div>
-        <div>
-          <img alt="avatar" src={info.avatar_url} />
-          <h2>{info.login}</h2>
-          {info.bio ? <p>{`Bio: ${info.bio}`}</p> : null}
-        </div>
-        <div>
-          <h3>Organization members</h3>
-          <List
-            createItem={this.createItem}
-            url={`https://api.github.com/orgs/${name}/members`}
-          />
-        </div>
+        <Info bio imgSrc={info.avatar_url} text={text} />
+        <h3 className="title">Organization members</h3>
+        <List
+          createItem={this.createItem}
+          url={`https://api.github.com/orgs/${name}/members`}
+        />
       </div>
     );
   }

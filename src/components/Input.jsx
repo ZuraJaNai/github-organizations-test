@@ -2,12 +2,16 @@ import React from "react";
 
 const Input = props => {
   return (
-    <input
-      type="text"
-      name="searchField"
-      value={props.value}
-      onChange={props.handleChange}
-    />
+    <div className="input-form">
+      <input
+        type="text"
+        id={props.inputId}
+        placeholder={props.inputText}
+        value={props.value}
+        onChange={props.handleChange}
+      />
+      <label htmlFor={props.inputId}>{props.inputText}</label>
+    </div>
   );
 };
 

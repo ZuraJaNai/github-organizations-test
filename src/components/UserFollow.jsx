@@ -1,31 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import List from "./List.jsx";
+import Info from "./Info.jsx";
 
 const UserFollow = props => {
-  let title;
+  let titleText;
   if (props.type === "following") {
-    title = <h3>{`Users followed by ${props.match.params.name}`}</h3>;
+    titleText = `Users followed by ${props.match.params.name}`;
   } else {
-    title = <h3>{`Users following ${props.match.params.name}`}</h3>;
+    titleText = `Users following ${props.match.params.name}`;
   }
+  const title = <h3 className="title">{titleText}</h3>;
 
   const createItem = data => {
     const userName = data.login;
-    return (
-      <div key={userName}>
-        <img alt="avatar" src={data.avatar_url} />
+    const text = (
+      <div>
         <Link to={`/user/${userName}`}>
-          <h3>{userName}</h3>
+          <p>{userName}</p>
         </Link>
         <Link to={`/user/${userName}/followers`}>
-          <h5>Followers</h5>
+          <p>Followers</p>
         </Link>
         <Link to={`/user/${userName}/followers`}>
-          <h5>Following</h5>
+          <p>Following</p>
         </Link>
       </div>
     );
+    return <Info key={userName} imgSrc={data.avatar_url} text={text} />;
   };
 
   return (
