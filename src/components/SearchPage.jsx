@@ -8,19 +8,28 @@ class SearchPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: "",
+      value: props.value || "",
       search: false
     };
   }
 
+  componentDidMount() {
+    const { value } = this.state;
+    if (value) {
+      this.setState({ search: true });
+    }
+  }
+
   delayedCallback = debounce(() => {
+    const { value } = this.state;
+    localStorage.setItem("value", value);
     this.setState({ search: true });
   }, 500);
 
   handleInputChange = event => {
     event.persist();
     this.setState({ value: event.target.value, search: false });
-    this.delayedCallback(event);
+    this.delayedCallback();
   };
 
   createItem = data => {
@@ -38,7 +47,7 @@ class SearchPage extends React.Component {
     const { value } = this.state;
     return (
       <div>
-        <Input handleChange={this.handleInputChange} />
+        <Input value={value} handleChange={this.handleInputChange} />
         {this.state.search ? (
           <List
             createItem={this.createItem}
