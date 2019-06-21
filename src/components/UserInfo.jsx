@@ -17,6 +17,9 @@ const UserInfo = props => {
     <div>
       <img alt="avatar" src={info.avatar_url} />
       <h3>{info.login}</h3>
+      {info.name ? <h4>{`Name: ${info.name}`}</h4> : null}
+      {info.location ? <h4>{`Location: ${info.location}`}</h4> : null}
+      {info.bio ? <p>{`Bio: ${info.bio}`}</p> : null}
       <p>{`Public repositories: ${info.public_repos}`}</p>
       <Link to={`/user/${info.login}/followers`}>
         <p>{`Followers:${info.followers}`}</p>

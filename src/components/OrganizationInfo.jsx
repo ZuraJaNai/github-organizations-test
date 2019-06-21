@@ -50,7 +50,7 @@ class OrganizationInfo extends React.Component {
         <div>
           <img alt="avatar" src={info.avatar_url} />
           <h2>{info.login}</h2>
-          <p>{info.bio}</p>
+          {info.bio ? <p>{`Bio: ${info.bio}`}</p> : null}
         </div>
         <div>
           <h3>Organization members</h3>

@@ -4,26 +4,25 @@ import axios from "axios";
 import List from "./List.jsx";
 
 const UserFollow = props => {
-  const [users, setUsers] = useState();
+  // const [users, setUsers] = useState();
 
-  useEffect(() => {
-    axios
-      .get(
-        `https://api.github.com/users/${props.match.params.name}/${props.type}`
-      )
-      .then(({ data }) => {
-        setUsers(data);
-      });
-  }, [props.match.params.name, props.type]);
+  // useEffect(() => {
+  //   console.log(props.match.params.name);
+  //   console.log(props.type);
+  //   axios
+  //     .get(
+  //       `https://api.github.com/users/${props.match.params.name}/${props.type}`
+  //     )
+  //     .then(({ data }) => {
+  //       setUsers(data);
+  //     });
+  // }, [props.match.params.name, props.type]);
 
   let title;
-  switch (props.type) {
-    case "following": {
-      title = <h3>{`Users followed by ${props.match.params.name}`}</h3>;
-    }
-    case "followers": {
-      title = <h3>{`Users following ${props.match.params.name}`}</h3>;
-    }
+  if (props.type === "following") {
+    title = <h3>{`Users followed by ${props.match.params.name}`}</h3>;
+  } else {
+    title = <h3>{`Users following ${props.match.params.name}`}</h3>;
   }
   const createItem = data => {
     const userName = data.login;
@@ -43,7 +42,7 @@ const UserFollow = props => {
     );
   };
 
-  return users ? (
+  return (
     <div>
       {title}
       <List
@@ -53,8 +52,6 @@ const UserFollow = props => {
         }`}
       />
     </div>
-  ) : (
-    <div>Loading...</div>
   );
 };
 
