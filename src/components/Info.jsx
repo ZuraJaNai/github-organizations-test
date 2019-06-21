@@ -14,7 +14,7 @@ const Info = (props) => {
 Info.propTypes = {
   bio: PropTypes.bool,
   imgSrc: PropTypes.string.isRequired,
-  text: PropTypes.symbol.isRequired,
+  text: PropTypes.node.isRequired,
 };
 
 Info.defaultProps = {

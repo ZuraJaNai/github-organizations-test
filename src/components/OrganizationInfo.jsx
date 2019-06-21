@@ -45,19 +45,22 @@ class OrganizationInfo extends React.Component {
 
   render() {
     const { name, info } = this.state;
-    const text = (
-      <div>
-        <h2>{info.login}</h2>
-        {info.bio ? <p>{`Bio: ${info.bio}`}</p> : null}
-      </div>
-    );
-    return (
-      <div>
-        <Info bio imgSrc={info.avatar_url} text={text} />
-        <h3 className="title">Organization members</h3>
-        <List createItem={this.createItem} url={`https://api.github.com/orgs/${name}/members`} />
-      </div>
-    );
+    if (info.login) {
+      const text = (
+        <div>
+          <h2>{info.login}</h2>
+          {info.bio ? <p>{`Bio: ${info.bio}`}</p> : null}
+        </div>
+      );
+      return (
+        <div>
+          <Info bio imgSrc={info.avatar_url} text={text} />
+          <h3 className="title">Organization members</h3>
+          <List createItem={this.createItem} url={`https://api.github.com/orgs/${name}/members`} />
+        </div>
+      );
+    }
+    return <div className="loading">Loading...</div>;
   }
 }
 

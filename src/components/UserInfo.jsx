@@ -12,7 +12,7 @@ const UserInfo = (props) => {
     },
   } = props;
   useEffect(() => {
-    axios.get(`https://api.github.com/users/${props.match.params.name}`).then(({ data }) => {
+    axios.get(`https://api.github.com/users/${name}`).then(({ data }) => {
       setInfo(data);
     });
   }, [name]);
@@ -35,7 +35,7 @@ const UserInfo = (props) => {
     );
     return <Info bio imgSrc={info.avatar_url} text={text} />;
   }
-  return <div>Loading...</div>;
+  return <div className="loading">Loading...</div>;
 };
 
 UserInfo.propTypes = {

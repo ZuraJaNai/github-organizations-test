@@ -17,6 +17,7 @@ code {
     monospace;
 }
 
+/* navbar  */
 nav {
   background: #24292e;
   justify-content: center;
@@ -32,6 +33,7 @@ nav a {
   font-weight: bold;
 }
 
+/* links */
 a:hover {
   color: #28a745;
 }
@@ -40,18 +42,15 @@ a {
   color: #000000;
 }
 
+/* images */
 img {
   width: 100px;
   height: 100px;
   border-radius: 5%;
-  margin: 10px;
+  margin: 10px 10px;
 }
 
-#logo {
-  width: 30px;
-  height: 30px;
-}
-
+/* information about user or organization */
 .info {
   display: flex;
   flex-direction: row;
@@ -92,6 +91,7 @@ img {
   font-weight: bold;
 }
 
+/* list */
 .list {
   display: flex;
   flex-direction: column;
@@ -100,6 +100,16 @@ img {
 
 .title {
   text-align: center;
+}
+
+/* loading */
+
+.loading {
+  margin-top: 20%;
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  color: #24292e;
 }
 
 /* input */
